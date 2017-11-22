@@ -5,6 +5,7 @@ from functools import wraps
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.ext.declarative import DeclarativeMeta
 
+
 app = Flask(__name__)
 app.secret_key = os.urandom(10)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
@@ -31,7 +32,7 @@ class AlchemyEncoder(json.JSONEncoder):
             for field in [x for x in dir(obj) if not x.startswith('_') and x != 'metadata']:
                 data = obj.__getattribute__(field)
                 try:
-                    json.dumps(data) # this will fail on non-encodable values, like other classes
+                    json.dumps(data)  # this will fail on non-encodable values, like other classes
                     fields[field] = data
                 except TypeError:
                     fields[field] = None
@@ -45,6 +46,7 @@ class AlchemyEncoder(json.JSONEncoder):
 # helper functions
 #
 
+
 def login_required(test):
     @wraps(test)
     def wrap(*args, **kwargs):
@@ -56,11 +58,11 @@ def login_required(test):
 
 
 def get_hashed_pass(raw_pass):
-    return bcrypt.hashpw(raw_pass, bcrypt.gensalt())
+    return bcrypt.hashpw(raw_pass.encode('utf8'), bcrypt.gensalt())
 
 
 def verify_pass(raw_pass, hashed_pass):
-    return bcrypt.checkpw(raw_pass, hashed_pass)
+    return bcrypt.checkpw(raw_pass.encode('utf8'), hashed_pass)
 
 
 #
