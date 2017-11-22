@@ -1,18 +1,15 @@
 # login-app
 
-1.) Download the zip of login-app from this link: 
-(python3) https://github.com/bmdatl/login-app 
-(python2) https://github.com/bmdatl/login-app2.7
+1.) Download the zip of login-app
 
 2.) Open terminal. 
 	2.1) if pip is not already installed, type: sudo easy_install pip
 	
 3.) Type: sudo pip install virtualenv
 
-4.) Type: cd downloads/login-app-master (or cd downloads/login-app2.7-master)
+4.) Type: cd downloads/login-app-master 
 
-5.) For python3, type: virtualenv -p python3 venv 
-	5.1) For python2, type: virtualenv venv
+5.) Type: virtualenv -p python3 venv 
 	
 6.) Type: source venv/bin/activate
 
